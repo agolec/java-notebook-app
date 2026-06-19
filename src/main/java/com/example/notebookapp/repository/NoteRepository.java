@@ -1,10 +1,12 @@
 package com.example.notebookapp.repository;
 
 import com.example.notebookapp.model.Folder;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteRepository {
+public class NoteRepository implements Serializable {
     private List<Folder> folders;
 
     public NoteRepository(){

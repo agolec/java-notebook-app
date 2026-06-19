@@ -1,10 +1,11 @@
 package com.example.notebookapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Folder {
+public class Folder implements Serializable {
     private String name;
     private List<Note> notes;
     private boolean readOnly;

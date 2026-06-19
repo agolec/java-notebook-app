@@ -1,5 +1,6 @@
 package com.example.notebookapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * The note class is all the code meant to make up a note.
  */
-public class Note {
+public class Note implements Serializable {
     private String title;
     private String body;
 

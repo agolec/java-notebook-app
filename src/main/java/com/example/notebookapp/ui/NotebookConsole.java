@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class NotebookConsole {
 
     private final Scanner kb;
-    private final NoteRepository repository;
+    private NoteRepository repository;
     private Folder currentFolder;
     private boolean running;
 
