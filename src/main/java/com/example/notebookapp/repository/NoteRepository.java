@@ -92,6 +92,9 @@ public class NoteRepository {
     public boolean folderExists(String name){
         return getFolder(name) != null;
     }
+    public boolean isEmpty(){
+        return this.getFolders().isEmpty();
+    }
 
 
 
