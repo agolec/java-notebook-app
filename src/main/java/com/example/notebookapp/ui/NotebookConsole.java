@@ -101,7 +101,7 @@ public class NotebookConsole {
 
     private void listFolders() {
 
-        if (repository.getFolders().isEmpty()) {
+        if (this.repository.isEmpty()) {
             System.out.println("No folders exist.");
             return;
         }
@@ -113,23 +113,33 @@ public class NotebookConsole {
     }
 
     private void openFolder() {
+        if(this.repository.isEmpty()){
+            System.out.println("Repository is empty!");
+            return;
+        }
+
         System.out.println("==OPEN FOLDER==");
         System.out.print("Enter the folder name.");
         System.out.print("> ");
 
         String folderName = kb.nextLine();
 
-        if (repository.folderExists(folderName)) {
-            System.out.println("folder opening");
-            this.currentFolder = repository.getFolder(folderName);
-        } else {
-            System.out.println("Folder not found.");
+        Folder folder = this.repository.getFolder(folderName);
+
+        if(folder == null){
+
+            System.out.println("Folder not found");
             return;
+
         }
+
+        this.currentFolder = folder;
+
         folderMenu();
     }
 
     private void folderMenu() {
+
         boolean inFolder = true;
 
         while(inFolder) {
@@ -154,14 +164,19 @@ public class NotebookConsole {
 
                 case "B":
                 case "b":
+
                     inFolder = false;
                     break;
+
                 default:
+
                     System.out.println("Invalid option");
+
             }
         }
     }
     private void createNote() {
+
         String title = enterNoteTitle();
         String body = enterNoteBody();
 
@@ -232,7 +247,7 @@ public class NotebookConsole {
     private void renameFolder(){
         boolean renaming = true;
         while(renaming){
-            if(this.repository.getFolders().isEmpty()){
+            if(this.repository.isEmpty()){
                 System.out.println("No folders to rename.");
                 return;
             }
@@ -263,7 +278,7 @@ public class NotebookConsole {
             System.out.println("Select a folder.");
             System.out.print("> ");
             folder = kb.nextLine();
-        }while(inputNotDigit(folder));
+        } while(inputNotDigit(folder));
         return this.repository.getFolder(Integer.parseInt(folder) - 1);
     }
     private String askForFolderName(){
