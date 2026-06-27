@@ -75,6 +75,17 @@ public class Folder implements Serializable {
         }
         return null;
     }
+    public Note getNote(String title){
+        return findNoteByTitle(title);
+    }
+    public Note getNote(int i){
+        try{
+            return this.notes.get(i);
+        } catch(IndexOutOfBoundsException e){
+            return null;
+        }
+
+    }
     public boolean removeNoteByTitle(String title){
         ensureWriteable();
         Note note = this.findNoteByTitle(title);

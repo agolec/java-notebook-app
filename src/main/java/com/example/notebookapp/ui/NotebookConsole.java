@@ -2,6 +2,7 @@ package com.example.notebookapp.ui;
 
 import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
+import com.example.notebookapp.persistence.RepositoryStorage;
 import com.example.notebookapp.repository.NoteRepository;
 
 import java.util.Scanner;
@@ -9,16 +10,26 @@ import java.util.Scanner;
 public class NotebookConsole {
 
     private final Scanner kb;
+    private final String DEFAULT_REPOSITORY = "notebook";
     private NoteRepository repository;
+    private RepositoryStorage storage;
     private Folder currentFolder;
     private boolean running;
 
     public NotebookConsole() {
         this.kb = new Scanner(System.in);
-        this.repository = new NoteRepository();
+        this.storage = new RepositoryStorage();
+        this.repository = storage.load(DEFAULT_REPOSITORY);
+
+        if(this.repository == null){
+            repository = new NoteRepository();
+        }
         this.running = true;
     }
 
+    private void saveRepo(){
+        this.storage.save(this.repository,this.DEFAULT_REPOSITORY);
+    }
     public void run() {
 
         while (running) {
@@ -45,7 +56,6 @@ public class NotebookConsole {
                 case "q":
                     exit();
                     break;
-
 
                 default:
                     System.out.println("Invalid option.");
@@ -82,6 +92,7 @@ public class NotebookConsole {
         System.out.println("1. Create Note");
         System.out.println("2. List Notes");
         System.out.println("3. Rename Folder");
+        System.out.println("4. Open Note");
         System.out.println("B. Back");
         System.out.print("> ");
     }
@@ -151,7 +162,10 @@ public class NotebookConsole {
                 case "3":
                     renameFolder();
                     break;
-
+                case "4":
+                    Note note = selectNote();
+                    openNote(note);
+                    break;
                 case "B":
                 case "b":
                     inFolder = false;
@@ -268,11 +282,36 @@ public class NotebookConsole {
     }
     private String askForFolderName(){
         while(true){
-            System.out.println("Enter a new folder name: ");
+            System.out.println("Enter a folder name: ");
             if(kb.hasNext()){
                 return kb.nextLine();
             }
         }
+    }
+    private Note selectNote(){
+        String index;
+        Note note = null;
+        if(this.currentFolder.getNotes().isEmpty()){
+            System.out.println("no notes in folder.");
+            return null;
+        }
+        do{
+            listNotes();
+            System.out.println("Select a note by list number");
+            System.out.print("> ");
+            index = kb.nextLine();
+            if(inputNotDigit(index)){
+                continue;
+            }
+            int i = Integer.parseInt(index);
+            note = this.currentFolder.getNote(i - 1);
+        }while(note == null);
+
+        return note;
+    }
+    private void openNote(Note note){
+        System.out.println(note.getTitle());
+        System.out.println(note.getBody());
     }
 
     private static boolean inputNotDigit(String folder) {
@@ -280,14 +319,38 @@ public class NotebookConsole {
     }
 
     private void deleteFolder(){
-
+        String folderInput;
+        String confirmation;
+        int indexOffset = 1;
+                do{
+                    listFolders();
+                    System.out.println("Select a folder for deletion or q to quit");
+                    System.out.print("> ");
+                    folderInput = kb.nextLine();
+                }while(inputNotDigit(folderInput) || folderInput != "Q");
+                if(folderInput == "Q"){
+                    return;
+                }
+                do{
+                    System.out.println("You chose to remove folder: '" + this.repository.getFolder(Integer.parseInt(folderInput) - indexOffset).getName());
+                    System.out.print("Are you sure? > ");
+                    confirmation = kb.nextLine();
+                }while(confirmation.toLowerCase() != "y" || confirmation.toLowerCase() != "yes" || confirmation.toLowerCase() != "n" || confirmation.toLowerCase() != "no");
+                if(confirmation.toLowerCase().charAt(0) == 'n'){
+                    return;
+                }
+                if(this.repository.removeFolder(this.repository.getFolder(Integer.parseInt(folderInput) - indexOffset).getName())){
+                    System.out.println("Folder removed.");
+                } else {
+                    System.out.println("Folder not removed.");
+                }
     }
     private void renameNote(){
 
     }
 
     private void exit() {
-
+        saveRepo();
         running = false;
         kb.close();
         System.out.println("Closing program. . .");

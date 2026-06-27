@@ -6,12 +6,13 @@ import com.example.notebookapp.ui.NotebookConsole;
 import java.io.*;
 
 public class RepositoryStorage {
-    private final String filename = "hub.dat";
-    public void save(NoteRepository repository){
-
+    private String fileName;
+    private final String FILE_EXTENSION = ".dat";
+    public void save(NoteRepository repository,String fileName){
+        this.fileName = fileName + FILE_EXTENSION;
 
         try{
-            FileOutputStream file = new FileOutputStream(filename);
+            FileOutputStream file = new FileOutputStream(fileName);
             ObjectOutputStream out = new ObjectOutputStream(file);
             out.writeObject(repository);
             out.close();
@@ -23,17 +24,18 @@ public class RepositoryStorage {
             throw new RuntimeException(e);
         }
     }
-    public NoteRepository load(){
-        NoteRepository nr = new NoteRepository();
+    public NoteRepository load(String fileName){
+        this.fileName = fileName + FILE_EXTENSION;
+        NoteRepository nr;
         try{
-            FileInputStream file = new FileInputStream(filename);
+            FileInputStream file = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(file);
             nr = (NoteRepository) in.readObject();
             in.close();
             file.close();
             System.out.println("Object has been successfully deserialized.");
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
