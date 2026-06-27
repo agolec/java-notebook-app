@@ -1,10 +1,11 @@
 package com.example.notebookapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Folder {
+public class Folder implements Serializable {
     private String name;
     private List<Note> notes;
     private boolean readOnly;
@@ -73,6 +74,17 @@ public class Folder {
             }
         }
         return null;
+    }
+    public Note getNote(String title){
+        return findNoteByTitle(title);
+    }
+    public Note getNote(int i){
+        try{
+            return this.notes.get(i);
+        } catch(IndexOutOfBoundsException e){
+            return null;
+        }
+
     }
     public boolean removeNoteByTitle(String title){
         ensureWriteable();
