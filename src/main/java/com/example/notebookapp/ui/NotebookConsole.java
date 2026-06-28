@@ -54,6 +54,9 @@ public class NotebookConsole {
                     openFolder();
                     break;
 
+                case "4":
+                    deleteFolder();
+                    break;
                 case "quit":
                 case "q":
                     exit();
@@ -72,7 +75,8 @@ public class NotebookConsole {
         System.out.println("1. Create Folder");
         System.out.println("2. List Folders");
         System.out.println("3. Open Folder");
-        System.out.println("quit. Exit");
+        System.out.println("4. Delete Folder");
+        System.out.println("q. Exit");
         System.out.print("> ");
     }
 
@@ -347,32 +351,55 @@ public class NotebookConsole {
     }
 
     private void deleteFolder(){
-        String folderInput;
-        String confirmation;
-        int indexOffset = 1;
-                do{
-                    listFolders();
-                    System.out.println("Select a folder for deletion or q to quit");
-                    System.out.print("> ");
-                    folderInput = kb.nextLine();
-                }while(inputNotDigit(folderInput) || folderInput != "Q");
-                if(folderInput == "Q"){
-                    return;
-                }
-                do{
-                    System.out.println("You chose to remove folder: '" + this.repository.getFolder(Integer.parseInt(folderInput) - indexOffset).getName());
-                    System.out.print("Are you sure? > ");
-                    confirmation = kb.nextLine();
-                }while(confirmation.toLowerCase() != "y" || confirmation.toLowerCase() != "yes" || confirmation.toLowerCase() != "n" || confirmation.toLowerCase() != "no");
-                if(confirmation.toLowerCase().charAt(0) == 'n'){
-                    return;
-                }
-                if(this.repository.removeFolder(this.repository.getFolder(Integer.parseInt(folderInput) - indexOffset).getName())){
-                    System.out.println("Folder removed.");
-                } else {
-                    System.out.println("Folder not removed.");
-                }
+        String folderInput = enterFolderNameForDeletion();
+
+        if(folderInput.equalsIgnoreCase("q")){
+            return;
+        }
+
+        boolean confirmation = getUserConfirmation();
+
+        if(!confirmation){
+            return;
+        }
+        if(folderRemovedSuccessfully(folderInput)){
+            System.out.println("Folder removed.");
+        } else {
+            System.out.println("Folder not removed.");
+        }
     }
+
+    private String enterFolderNameForDeletion() {
+        String folderInput;
+        do{
+            listFolders();
+            System.out.println("Select a folder for deletion or q to quit");
+            System.out.print("> ");
+            folderInput = kb.nextLine();
+        }while(inputNotDigit(folderInput) && !folderInput.equalsIgnoreCase("q"));
+        return folderInput;
+    }
+
+    private boolean getUserConfirmation() {
+        while(true){
+            System.out.print("Are you sure? (y/n) > ");
+            String confirmationInput = kb.nextLine().trim().toLowerCase();
+
+            switch(confirmationInput){
+                case "y","yes":
+                    return true;
+                case "n","no":
+                    return false;
+                default:
+                    System.out.println("Please enter y or n for yes/no.");
+            }
+        }
+    }
+
+    private boolean folderRemovedSuccessfully(String folderInput) {
+        return this.repository.removeFolder(this.repository.getFolder(Integer.parseInt(folderInput) - 1).getName());
+    }
+
     private void renameNote(){
 
     }
