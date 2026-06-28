@@ -60,3 +60,8 @@ Responsible for storing and retrieving notes.
 
 Example:
     - NoteService
+
+## Note:
+<p>Saved data is not guaranteed to be compatible across development versions.
+Delete the save file if deserialization fails after pulling new changes, or making 
+changes to any serialized class during your development. </p>

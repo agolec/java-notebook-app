@@ -5,6 +5,8 @@ import com.example.notebookapp.model.Note;
 import com.example.notebookapp.persistence.RepositoryStorage;
 import com.example.notebookapp.repository.NoteRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class NotebookConsole {
@@ -90,10 +92,12 @@ public class NotebookConsole {
         System.out.println();
         System.out.println("=== Folder ===");
         System.out.println("1. Create Note");
-        System.out.println("2. List Notes");
+        System.out.println("2. List Notes (enter --v for metadata output)");
         System.out.println("3. Rename Folder");
-        System.out.println("4. Open Note");
+        System.out.println("4. Open Note (enter --v for metadata output)");
         System.out.println("B. Back");
+        System.out.println("\n");
+        System.out.println("Enter the number of your choice, and optional metadata tag");
         System.out.print("> ");
     }
 
@@ -148,15 +152,28 @@ public class NotebookConsole {
             printFolderMenu();
 
             String input = kb.nextLine();
+            String[] tokens = input.split("\\s+");
+            String choice = tokens[0];
+            List<String> flags = new ArrayList<>();
 
-            switch(input) {
+            for(int i = 1; i < tokens.length;i++){
+                flags.add(tokens[i]);
+            }
+            boolean verbose = false;
+            for(int i = 0; i < flags.size();i++){
+                if(flags.get(i).contains("--v")){
+                    verbose = true;
+                }
+            }
+
+            switch(choice) {
 
                 case "1":
                     createNote();
                     break;
 
                 case "2":
-                    listNotes();
+                    listNotes(verbose);
                     break;
 
                 case "3":
@@ -224,7 +241,7 @@ public class NotebookConsole {
         return sb.toString();
     }
 
-    private void listNotes(){
+    private void listNotes(boolean verbose){
 
         int i = 0;
 
@@ -233,6 +250,14 @@ public class NotebookConsole {
             return;
         }
 
+        if(verbose){
+            for(Note note: this.currentFolder.getNotes()){
+                System.out.println("----");
+                System.out.println(note);
+                System.out.println("----");
+            }
+            return;
+        }
         for(Note note: this.currentFolder.getNotes()){
             System.out.println((i+1)+". " + note.getTitle());
             i++;
@@ -296,7 +321,7 @@ public class NotebookConsole {
             return null;
         }
         do{
-            listNotes();
+            listNotes(false);
             System.out.println("Select a note by list number");
             System.out.print("> ");
             index = kb.nextLine();
@@ -310,6 +335,9 @@ public class NotebookConsole {
         return note;
     }
     private void openNote(Note note){
+        if(note == null){
+            System.out.println("Error: note is null.");
+        }
         System.out.println(note.getTitle());
         System.out.println(note.getBody());
     }
