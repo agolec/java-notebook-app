@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
  * The note class is all the code meant to make up a note.
  */
 public class Note implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String title;
     private String body;
 
@@ -44,9 +45,24 @@ public class Note implements Serializable {
         this.title = title;
         touch();
     }
-    public void rename(String title){
-        touch();
-        this.setTitle(title);
+    public boolean renameTitle(String title){
+
+        if(this.title.equalsIgnoreCase(title)){
+            System.out.println("Error: title provided is the same as given title.");
+            return false;
+        }
+        try{
+
+            this.setTitle(title);
+            return true;
+
+        } catch (IllegalArgumentException e){
+            e.getMessage();
+            return false;
+        }
+
+
+
     }
 
     public String getBody() {
@@ -110,11 +126,11 @@ public class Note implements Serializable {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Title: " + this.getTitle() + "\n")
-                .append("Body: " + this.getBody() + "\n")
-                .append("Word Count:" + this.calculateWordCount() + "\n")
-                .append("Date Created: " + this.getCreatedDate() + "\n")
-                .append("Date Modified: " + this.getModifiedDate() + "\n");
+        sb.append("Title: " + this.getTitle() + "\n\n")
+                .append("Body: " + this.getBody() + "\n\n")
+                .append("Word Count:" + this.calculateWordCount() + "\n\n")
+                .append("Date Created: " + this.getCreatedDate() + "\n\n")
+                .append("Date Modified: " + this.getModifiedDate() + "\n\n");
         return sb.toString();
     }
 

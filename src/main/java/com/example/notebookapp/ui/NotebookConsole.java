@@ -87,9 +87,18 @@ public class NotebookConsole {
         System.out.println("1. Create Note");
         System.out.println("2. List Notes");
         System.out.println("3. View Note");
+        System.out.println("4. Edit Note");
         System.out.println("B. Back");
         System.out.print("> ");
 
+    }
+
+    private void printEditNoteMenu(){
+        System.out.println();
+        System.out.println("=== EDIT Note ===");
+        System.out.println("1. rename note");
+        System.out.println("2. remove body");
+        System.out.println("B: Back");
     }
 
     private void printFolderMenu(){
@@ -99,6 +108,7 @@ public class NotebookConsole {
         System.out.println("2. List Notes (enter --v for metadata output)");
         System.out.println("3. Rename Folder");
         System.out.println("4. Open Note (enter --v for metadata output)");
+        System.out.println("5. Edit Note");
         System.out.println("B. Back");
         System.out.println("\n");
         System.out.println("Enter the number of your choice, and optional metadata tag");
@@ -187,6 +197,16 @@ public class NotebookConsole {
                     Note note = selectNote();
                     openNote(note);
                     break;
+                case "5":
+
+                    //printEditNoteMenu();
+                    Note noteForEditing = selectNote();
+                    if(noteForEditing == null){
+                        System.out.println("Error: no notes.");
+                        break;
+                    }
+                    editNote(noteForEditing);
+                    break;
                 case "B":
                 case "b":
                     inFolder = false;
@@ -262,6 +282,7 @@ public class NotebookConsole {
             }
             return;
         }
+        System.out.println("\n");
         for(Note note: this.currentFolder.getNotes()){
             System.out.println((i+1)+". " + note.getTitle());
             i++;
@@ -320,7 +341,7 @@ public class NotebookConsole {
     private Note selectNote(){
         String index;
         Note note = null;
-        if(this.currentFolder.getNotes().isEmpty()){
+        if(this.currentFolder.getNotes() == null || this.currentFolder.getNotes().isEmpty()){
             System.out.println("no notes in folder.");
             return null;
         }
@@ -341,6 +362,7 @@ public class NotebookConsole {
     private void openNote(Note note){
         if(note == null){
             System.out.println("Error: note is null.");
+            return;
         }
         System.out.println(note.getTitle());
         System.out.println(note.getBody());
@@ -400,8 +422,58 @@ public class NotebookConsole {
         return this.repository.removeFolder(this.repository.getFolder(Integer.parseInt(folderInput) - 1).getName());
     }
 
-    private void renameNote(){
+    private void renameNote(Note note){
+        String newName;
+        System.out.println("Enter new name for note.");
+        System.out.print("> ");
+        newName = kb.nextLine();
+        String renameSuccess = note.renameTitle(newName) ? "Rename successful" : "Rename unsuccessful";
+        System.out.println(renameSuccess);
+    }
+    private void removeBody(Note note){
+        String input;
+        do{
+            System.out.println("Remove body to '" + note.getTitle() + "'?");
+            input = kb.nextLine().trim().toLowerCase();
 
+        }while(input.charAt(0) != 'y' && input.charAt(0) != 'n');
+        if(input.charAt(0) == 'y'){
+            note.setBody("");
+        }
+        if(note.getBody().isEmpty()){
+            String newBody = this.enterNoteBody();
+            note.setBody(newBody);
+            System.out.println("New Body set.");
+        }
+
+    }
+    private void editNote(Note note){
+
+        String input;
+
+        do{
+
+            printEditNoteMenu();
+            System.out.println("Select an operation or b to back out.");
+            input = kb.nextLine();
+
+
+        } while(inputNotDigit(input) && !input.equalsIgnoreCase("b"));
+
+        switch(input){
+            case "1":
+                renameNote(note);
+                break;
+            case "2":
+                removeBody(note);
+                break;
+            case "b":
+                break;
+            case"default":
+                System.out.println("Not a valid option.");
+                break;
+
+        }
     }
 
     private void exit() {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Folder implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private List<Note> notes;
     private boolean readOnly;
