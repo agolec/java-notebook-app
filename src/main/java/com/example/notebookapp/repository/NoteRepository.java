@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoteRepository implements Serializable {
+    private final static long serialVersionUID = 1L;
     private List<Folder> folders;
 
     public NoteRepository(){
