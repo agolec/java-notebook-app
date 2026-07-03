@@ -31,3 +31,9 @@ Technical Notes
 
 Testing Notes
 =
+- Try to delete a folder when none exist
+- Try to delete a folder when at least one exists
+- Try to delete a folder whose name/number does not exist
+
+## Status
+DONE
