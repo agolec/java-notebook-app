@@ -373,7 +373,13 @@ public class NotebookConsole {
     }
 
     private void deleteFolder(){
+        if(this.repository.getFolders().isEmpty()){
+            System.out.println("No folders in repository.");
+            return;
+        }
         String folderInput = enterFolderNameForDeletion();
+
+
 
         if(folderInput.equalsIgnoreCase("q")){
             return;
