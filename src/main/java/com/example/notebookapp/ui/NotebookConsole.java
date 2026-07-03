@@ -5,6 +5,10 @@ import com.example.notebookapp.model.Note;
 import com.example.notebookapp.persistence.RepositoryStorage;
 import com.example.notebookapp.repository.NoteRepository;
 
+import javax.swing.text.DateFormatter;
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -195,7 +199,7 @@ public class NotebookConsole {
                     break;
                 case "4":
                     Note note = selectNote();
-                    openNote(note);
+                    openNote(note,verbose);
                     break;
                 case "5":
 
@@ -359,13 +363,26 @@ public class NotebookConsole {
 
         return note;
     }
-    private void openNote(Note note){
+    private void openNote(Note note, boolean verbose){
+
         if(note == null){
             System.out.println("Error: note is null.");
             return;
         }
+
         System.out.println(note.getTitle());
+        System.out.println();
         System.out.println(note.getBody());
+        System.out.println();
+
+        if(verbose){
+
+            System.out.println();
+            System.out.println(note.getCreatedDate().truncatedTo(ChronoUnit.SECONDS));
+            System.out.println();
+            System.out.println(note.getModifiedDate().truncatedTo(ChronoUnit.SECONDS));
+            System.out.println();
+        }
     }
 
     private static boolean inputNotDigit(String folder) {
