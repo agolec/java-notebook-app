@@ -4,6 +4,7 @@ import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
 import com.example.notebookapp.persistence.RepositoryStorage;
 import com.example.notebookapp.repository.NoteRepository;
+import com.example.notebookapp.ui.menu.MenuPrinter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class NotebookConsole {
 
         while (running) {
 
-            printMainMenu();
+            MenuPrinter.printMainMenu();
 
             String input = kb.nextLine();
 
@@ -66,53 +67,6 @@ public class NotebookConsole {
                     System.out.println("Invalid option.");
             }
         }
-    }
-
-    private void printMainMenu() {
-
-        System.out.println();
-        System.out.println("=== Folder ===");
-        System.out.println("1. Create Folder");
-        System.out.println("2. List Folders");
-        System.out.println("3. Open Folder");
-        System.out.println("4. Delete Folder");
-        System.out.println("q. Exit");
-        System.out.print("> ");
-    }
-
-    private void printNoteMenu() {
-
-        System.out.println();
-        System.out.println("=== Notebook ===");
-        System.out.println("1. Create Note");
-        System.out.println("2. List Notes");
-        System.out.println("3. View Note");
-        System.out.println("4. Edit Note");
-        System.out.println("B. Back");
-        System.out.print("> ");
-
-    }
-
-    private void printEditNoteMenu(){
-        System.out.println();
-        System.out.println("=== EDIT Note ===");
-        System.out.println("1. rename note");
-        System.out.println("2. remove body");
-        System.out.println("B: Back");
-    }
-
-    private void printFolderMenu(){
-        System.out.println();
-        System.out.println("=== Folder ===");
-        System.out.println("1. Create Note");
-        System.out.println("2. List Notes (enter --v for metadata output)");
-        System.out.println("3. Rename Folder");
-        System.out.println("4. Open Note (enter --v for metadata output)");
-        System.out.println("5. Edit Note");
-        System.out.println("B. Back");
-        System.out.println("\n");
-        System.out.println("Enter the number of your choice, and optional metadata tag");
-        System.out.print("> ");
     }
 
     private void createFolder() {
@@ -163,7 +117,7 @@ public class NotebookConsole {
 
         while(inFolder) {
 
-            printFolderMenu();
+            MenuPrinter.printFolderMenu();
 
             String input = kb.nextLine();
             String[] tokens = input.split("\\s+");
@@ -459,7 +413,7 @@ public class NotebookConsole {
 
         do{
 
-            printEditNoteMenu();
+            MenuPrinter.printEditNoteMenu();
             System.out.println("Select an operation or b to back out.");
             input = kb.nextLine();
 
