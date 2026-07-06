@@ -26,7 +26,8 @@ public class FolderOperations {
         }
     }
 
-    public static void openFolder(NoteRepository repository, Folder currentFolder, Scanner kb) {
+    public static void openFolder(NoteRepository repository, Scanner kb) {
+        Folder currentFolder = null;
         System.out.println("==OPEN FOLDER==");
         System.out.print("Enter the folder name.");
         System.out.print("> ");
