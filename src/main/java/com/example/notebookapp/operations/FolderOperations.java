@@ -15,8 +15,6 @@ import java.util.Scanner;
 public class FolderOperations {
     public static void createFolder(NoteRepository repository, Scanner kb) {
 
-        System.out.print("Folder Name: ");
-
         String name = ConsoleInput.askForFolderName(kb);
 
         if (repository.addFolder(name)) {
