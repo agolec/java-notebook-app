@@ -20,7 +20,6 @@ public class NotebookConsole {
     private final String DEFAULT_REPOSITORY = "notebook";
     private NoteRepository repository;
     private RepositoryStorage storage;
-    private Folder currentFolder;
     private boolean running;
 
     public NotebookConsole() {
@@ -56,7 +55,7 @@ public class NotebookConsole {
                     break;
 
                 case "3":
-                    FolderOperations.openFolder(this.repository,this.currentFolder,this.kb);
+                    FolderOperations.openFolder(this.repository,this.kb);
                     break;
 
                 case "4":
