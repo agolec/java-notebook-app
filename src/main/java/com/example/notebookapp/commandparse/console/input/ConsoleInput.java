@@ -1,6 +1,5 @@
-package com.example.notebookapp.commandparse.command;
+package com.example.notebookapp.commandparse.console.input;
 
-import java.io.Console;
 import java.util.Scanner;
 
 public class ConsoleInput {
