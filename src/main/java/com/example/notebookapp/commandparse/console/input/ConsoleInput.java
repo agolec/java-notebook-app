@@ -4,16 +4,10 @@ import java.util.Scanner;
 
 public class ConsoleInput {
     private final Scanner scanner;
-    private static ConsoleInput instance;
-    private ConsoleInput(){
-        this.scanner = new Scanner(System.in);
+    public ConsoleInput(Scanner scan){
+        this.scanner = scan;
     }
-    public static ConsoleInput getInstance(){
-        if(instance == null){
-            instance = new ConsoleInput();
-        }
-        return instance;
-    }
+
     public String getLine(String prompt){
         String input;
         do{

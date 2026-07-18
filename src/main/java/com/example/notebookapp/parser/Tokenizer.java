@@ -1,9 +1,9 @@
-package com.example.notebookapp.commandparse.console.input;
+package com.example.notebookapp.parser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputParser {
+public class Tokenizer {
 
     public static String[] parseUserInput(String input) {
 
