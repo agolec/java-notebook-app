@@ -1,0 +1,18 @@
+package com.example.notebookapp.command;
+
+public enum CommandType {
+    CREATE_FOLDER,
+    EDIT_FOLDER_TITLE,
+    EDIT_FOLDER_BODY,
+    LIST_FOLDER,
+    DELETE_FOLDER,
+    CREATE_NOTE,
+    EDIT_NOTE_TITLE,
+    LIST_NOTE,
+    EDIT_NOTE_BODY,
+    DELETE_NOTE,
+    HELP,
+    BACK,
+    EXIT,
+    UNKNOWN
+}
