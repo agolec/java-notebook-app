@@ -2,6 +2,7 @@ package com.example.notebookapp.command;
 
 public enum CommandType {
     CREATE_FOLDER,
+    OPEN_FOLDER,
     EDIT_FOLDER_TITLE,
     EDIT_FOLDER_BODY,
     LIST_FOLDER,

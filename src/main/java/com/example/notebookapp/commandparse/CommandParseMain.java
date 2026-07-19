@@ -5,6 +5,7 @@ import com.example.notebookapp.command.Command;
 import com.example.notebookapp.command.CommandType;
 import com.example.notebookapp.commandparse.console.input.ConsoleInput;
 import com.example.notebookapp.parser.InputParser;
+import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.persistence.RepositoryStorage;
 import com.example.notebookapp.repository.NoteRepository;
 
@@ -19,7 +20,7 @@ public class CommandParseMain {
         if(repository == null){
             repository = new NoteRepository();
         }
-
+        ApplicationContext context = new ApplicationContext(repository);
         Scanner in = new Scanner(System.in);
         ConsoleInput conIn = new ConsoleInput(in);
 
@@ -33,7 +34,7 @@ public class CommandParseMain {
                 break;
             }
 
-            CommandExecution.execute(command,repository);
+            CommandExecution.execute(command,context);
 
         }
     }

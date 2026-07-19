@@ -1,7 +1,9 @@
 package com.example.notebookapp.operations;
 
+import com.example.notebookapp.command.Command;
 import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
+import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.repository.NoteRepository;
 import com.example.notebookapp.ui.display.NoteDisplay;
 import com.example.notebookapp.ui.input.ConsoleInput;
@@ -40,6 +42,18 @@ public class FolderOperations {
             return;
         }
         folderMenu(repository,currentFolder,kb);
+    }
+    public static void openFolder(ApplicationContext context, Command command){
+        String folderName = command.getArguments()[0];
+        Folder folder = context.getRepository().getFolder(folderName);
+
+        if(folder == null){
+            System.out.println("folder doesn't exist");
+        }
+        else {
+            context.setCurrentFolder(folder);
+            System.out.println("Folder opened :" + context.getCurrentFolder().getName());
+        }
     }
 
     public static void folderMenu(NoteRepository repository, Folder currentFolder ,Scanner kb) {
