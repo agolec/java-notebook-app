@@ -24,7 +24,7 @@ public class CommandParseMain {
         ConsoleInput conIn = new ConsoleInput(in);
 
         while(true){
-            String input = conIn.getLine("Enter your string: ");
+            String input = conIn.getLinePrint("> ");
 
             Command command = InputParser.parseCommand(input);
 

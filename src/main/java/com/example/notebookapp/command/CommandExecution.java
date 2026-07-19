@@ -1,6 +1,7 @@
 package com.example.notebookapp.command;
 
 import com.example.notebookapp.HelpText;
+import com.example.notebookapp.operations.FolderOperations;
 import com.example.notebookapp.repository.NoteRepository;
 import com.example.notebookapp.ui.display.FolderDisplay;
 
@@ -22,6 +23,9 @@ public class CommandExecution {
             }
             case LIST_FOLDER -> {
                 FolderDisplay.listFolders(repository);
+            }
+            case DELETE_FOLDER -> {
+                FolderOperations.deleteFolder(repository,command.getArguments());
             }
 
         }

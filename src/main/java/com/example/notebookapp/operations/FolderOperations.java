@@ -121,6 +121,30 @@ public class FolderOperations {
         }
 
     }
+
+    /**
+     *      Method for use in the terminal implementation of this
+     * @param repository
+     */
+    public static void deleteFolder(NoteRepository repository,String[] arguments){
+        boolean removed;
+        if(repository.getFolders().isEmpty()){
+            removed = false;
+            System.out.println("No folders to delete");
+        }
+        //I assume a null check is needed to see if the folder exists at all to output the appropriate message?????
+        if(repository.getFolder(arguments[0]) == null){
+            System.out.println("Folder not found");
+        }
+            removed = repository.removeFolder(arguments[0]);
+
+        if(removed){
+            System.out.println("folder removed successfully");
+            return;
+        }
+        System.out.println("Folder not removed.");
+
+    }
     public static void renameFolder(NoteRepository repository, Scanner kb){
         boolean renaming = true;
         while(renaming){

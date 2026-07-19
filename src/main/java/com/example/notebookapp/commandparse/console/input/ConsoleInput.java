@@ -17,4 +17,13 @@ public class ConsoleInput {
         } while(input == null || input.isEmpty());
         return input;
     }
+    public String getLinePrint(String prompt){
+        String input;
+        do{
+            System.out.print(prompt);
+            input = this.scanner.nextLine();
+
+        } while(input == null || input.isEmpty());
+        return input;
+    }
 }
