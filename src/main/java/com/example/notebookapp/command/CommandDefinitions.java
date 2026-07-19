@@ -8,6 +8,7 @@ public class CommandDefinitions {
         final String HELP = "help";
         final String QUIT = "quit";
 
+        final String OPEN = "open";
         final String EDIT = "edit";
         final String CREATE = "create";
         final String DELETE = "delete";
@@ -27,6 +28,7 @@ public class CommandDefinitions {
 
 
         commands.add(new CommandDefinition(CommandType.CREATE_FOLDER,CREATE, FOLDER));
+        commands.add(new CommandDefinition(CommandType.OPEN_FOLDER,OPEN,FOLDER));
         commands.add(new CommandDefinition(CommandType.EDIT_FOLDER_TITLE,EDIT,FOLDER,TITLE));
         commands.add(new CommandDefinition(CommandType.EDIT_FOLDER_BODY,EDIT,FOLDER,BODY));
         commands.add(new CommandDefinition(CommandType.LIST_FOLDER,LIST,FOLDER + "s"));
