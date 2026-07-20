@@ -7,6 +7,7 @@ public class CommandDefinitions {
     public static List<CommandDefinition> getDefinitions(){
         final String HELP = "help";
         final String QUIT = "quit";
+        final String EXIT = "exit";
 
         final String OPEN = "open";
         final String EDIT = "edit";
@@ -24,8 +25,7 @@ public class CommandDefinitions {
 
         commands.add(new CommandDefinition(CommandType.HELP,HELP));
         commands.add(new CommandDefinition(CommandType.EXIT,QUIT));
-        //commands.add(new CommandDefinition(CommandType.BACK,BACK));
-
+        commands.add(new CommandDefinition(CommandType.EXIT,EXIT));
 
         commands.add(new CommandDefinition(CommandType.CREATE_FOLDER,CREATE, FOLDER));
         commands.add(new CommandDefinition(CommandType.OPEN_FOLDER,OPEN,FOLDER));
