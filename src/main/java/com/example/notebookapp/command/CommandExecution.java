@@ -22,14 +22,7 @@ public class CommandExecution {
                 return ExecutionResult.CONTINUE;
             }
             case CREATE_FOLDER ->{
-                String folderName = command.getArguments()[0];
-                boolean created = context.getRepository().addFolder(folderName);
-
-                if(created){
-                    System.out.println("folder created");
-                } else {
-                    System.out.println("Folder already exists");
-                }
+                FolderOperations.createFolder(command, context);
                 return ExecutionResult.CONTINUE;
             }
             case LIST_FOLDER -> {
