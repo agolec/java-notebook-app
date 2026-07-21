@@ -2,6 +2,7 @@ package com.example.notebookapp.operations;
 
 import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
+import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.ui.input.ConsoleInput;
 import com.example.notebookapp.ui.input.InputValidation;
 import com.example.notebookapp.ui.menu.MenuPrinter;
@@ -74,5 +75,15 @@ public class NoteOperations {
             System.out.println("New Body set.");
         }
 
+    }
+    public static void displayNotes(Folder folder){
+        if(folder == null){
+            System.out.println("Error: No folder selected.");
+            System.out.println("Choose your folder first.");
+            return;
+        }
+        for(Note note: folder.getNotes()){
+            System.out.println(note.getTitle());
+        }
     }
 }
