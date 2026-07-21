@@ -14,7 +14,7 @@ public class ConsoleInput {
             System.out.println(prompt);
             input = this.scanner.nextLine();
 
-        } while(input == null || input.isEmpty());
+        } while(input == null || input.isBlank());
         return input;
     }
     public String getLinePrint(String prompt){
@@ -23,7 +23,7 @@ public class ConsoleInput {
             System.out.print(prompt);
             input = this.scanner.nextLine();
 
-        } while(input == null || input.isEmpty());
+        } while(input == null || input.isBlank());
         return input;
     }
 }

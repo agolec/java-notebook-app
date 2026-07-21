@@ -25,6 +25,37 @@ public class FolderOperations {
             System.out.println("Unable to create folder.");
         }
     }
+    public static void createFolder(Command command, ApplicationContext context) {
+        String folderName;
+        folderName = assignFolderName(command);
+
+        if(folderName.isEmpty()){
+            return;
+        }
+        if(folderName.isBlank()){
+            System.out.println("folder name cannot be blank.");
+            return;
+        }
+
+        boolean created = context.getRepository().addFolder(folderName);
+
+        if(created){
+            System.out.println("folder created");
+        } else {
+            System.out.println("Folder already exists");
+        }
+    }
+
+    private static String assignFolderName(Command command) {
+        String folderName;
+        try{
+            folderName = command.getArguments()[0];
+        } catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Please enter a title.");
+            return "";
+        }
+        return folderName;
+    }
 
     public static void openFolder(NoteRepository repository, Scanner kb) {
         Folder currentFolder = null;

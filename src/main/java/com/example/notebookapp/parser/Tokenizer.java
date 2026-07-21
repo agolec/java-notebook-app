@@ -33,8 +33,8 @@ public class Tokenizer {
                     currentToken.setLength(0);
                 }
             }
-            //if the current character is neither " nor an empty space,
-            // append it to the currentToken stringbuilder.
+            // Any character that is not acting as a delimiter becomes part of the
+            // current token. This includes spaces that occur inside quoted text.
             else {
                 currentToken.append(character);
             }
