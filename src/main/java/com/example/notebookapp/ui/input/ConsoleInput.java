@@ -13,7 +13,7 @@ public class ConsoleInput {
     public static String enterFolderNameForDeletion(Scanner kb, NoteRepository repository) {
         String folderInput;
         do{
-            FolderDisplay.listFolders(repository);
+            FolderDisplay.listFolders(repository,true);
             System.out.println("Select a folder for deletion or q to quit");
             System.out.print("> ");
             folderInput = kb.nextLine();
@@ -26,7 +26,7 @@ public class ConsoleInput {
     public static Folder selectFolder(Scanner kb, NoteRepository repository){
         String folder;
         do{
-            FolderDisplay.listFolders(repository);
+            FolderDisplay.listFolders(repository,true);
             System.out.println("Select a folder.");
             System.out.print("> ");
             folder = kb.nextLine();

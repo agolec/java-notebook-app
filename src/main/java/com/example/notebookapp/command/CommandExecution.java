@@ -33,7 +33,8 @@ public class CommandExecution {
                 return ExecutionResult.CONTINUE;
             }
             case LIST_FOLDER -> {
-                FolderDisplay.listFolders(context.getRepository());
+
+                FolderDisplay.listFolders(context.getRepository(),false);
                 return ExecutionResult.CONTINUE;
             }
             case OPEN_FOLDER -> {
