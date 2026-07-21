@@ -22,7 +22,7 @@ public class CommandExecution {
                 }
             }
             case LIST_FOLDER -> {
-                FolderDisplay.listFolders(repository);
+                FolderDisplay.listFolders(repository,false);
             }
             case DELETE_FOLDER -> {
                 FolderOperations.deleteFolder(repository,command.getArguments());

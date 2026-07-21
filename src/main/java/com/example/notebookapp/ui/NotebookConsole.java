@@ -51,7 +51,7 @@ public class NotebookConsole {
                     break;
 
                 case "2":
-                    FolderDisplay.listFolders(this.repository);
+                    FolderDisplay.listFolders(this.repository,true);
                     break;
 
                 case "3":
