@@ -2,6 +2,7 @@ package com.example.notebookapp.command;
 
 import com.example.notebookapp.HelpText;
 import com.example.notebookapp.operations.FolderOperations;
+import com.example.notebookapp.operations.NoteOperations;
 import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.ui.display.FolderDisplay;
 
@@ -36,6 +37,10 @@ public class CommandExecution {
             }
             case DELETE_FOLDER -> {
                 FolderOperations.deleteFolder(context.getRepository(),command.getArguments());
+                return ExecutionResult.CONTINUE;
+            }
+            case LIST_NOTE -> {
+                NoteOperations.displayNotes(context.getCurrentFolder());
                 return ExecutionResult.CONTINUE;
             }
             default -> {
