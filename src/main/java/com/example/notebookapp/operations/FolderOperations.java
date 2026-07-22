@@ -51,7 +51,7 @@ public class FolderOperations {
         try{
             folderName = command.getArguments()[0];
         } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("Please enter a title.");
+            System.out.println("Please enter a title as an argument");
             return "";
         }
         return folderName;
@@ -75,7 +75,7 @@ public class FolderOperations {
         folderMenu(repository,currentFolder,kb);
     }
     public static void openFolder(ApplicationContext context, Command command){
-        String folderName = command.getArguments()[0];
+        String folderName = assignFolderName(command);
         Folder folder = context.getRepository().getFolder(folderName);
 
         if(folder == null){
