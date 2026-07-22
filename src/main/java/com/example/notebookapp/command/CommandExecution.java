@@ -36,7 +36,7 @@ public class CommandExecution {
                 return ExecutionResult.CONTINUE;
             }
             case DELETE_FOLDER -> {
-                FolderOperations.deleteFolder(context.getRepository(),command.getArguments());
+                FolderOperations.deleteFolder(context.getRepository(),command);
                 return ExecutionResult.CONTINUE;
             }
             case LIST_NOTE -> {
