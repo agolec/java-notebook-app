@@ -82,6 +82,10 @@ public class NoteOperations {
             System.out.println("Choose your folder first.");
             return;
         }
+        else if(folder.getNotes().isEmpty()){
+            System.out.println("No notes in folder.");
+            return;
+        }
         for(Note note: folder.getNotes()){
             System.out.println(note.getTitle());
         }
