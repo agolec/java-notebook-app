@@ -7,6 +7,7 @@ import com.example.notebookapp.ui.input.ConsoleInput;
 import com.example.notebookapp.ui.input.InputValidation;
 import com.example.notebookapp.ui.menu.MenuPrinter;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class NoteOperations {
@@ -88,6 +89,30 @@ public class NoteOperations {
         }
         for(Note note: folder.getNotes()){
             System.out.println(note.getTitle());
+        }
+    }
+
+    public static void viewNotes(Folder currentFolder) {
+        if(currentFolder.getNotes() == null){
+            System.out.println("no notes");
+        }
+        else if(currentFolder.getNotes().isEmpty()){
+            System.out.println("no notes");
+        } else{
+            printNotesInCurrentFolder(currentFolder);
+        }
+
+    }
+
+    private static void printNotesInCurrentFolder(Folder currentFolder) {
+        List<Note> notes = currentFolder.getNotes();
+        for(Note note: notes){
+            System.out.println();
+            System.out.println("Title: " + note.getTitle());
+            System.out.println("Created on " + note.getCreatedDate());
+            System.out.println("Last Modified: " + note.getModifiedDate());
+            System.out.println("Word Count: " + note.getWordCount());
+            System.out.println();
         }
     }
 }

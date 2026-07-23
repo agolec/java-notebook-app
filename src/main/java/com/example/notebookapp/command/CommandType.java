@@ -10,6 +10,8 @@ public enum CommandType {
     CREATE_NOTE,
     EDIT_NOTE_TITLE,
     LIST_NOTE,
+    VIEW_NOTE,
+    VIEW_NOTES,
     EDIT_NOTE_BODY,
     DELETE_NOTE,
     HELP,

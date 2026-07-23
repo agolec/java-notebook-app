@@ -14,6 +14,7 @@ public class CommandDefinitions {
         final String CREATE = "create";
         final String DELETE = "delete";
         final String LIST = "list";
+        final String VIEW = "view";
 
         final String FOLDER = "folder";
         final String NOTE = "note";
@@ -37,6 +38,8 @@ public class CommandDefinitions {
 
 
         commands.add(new CommandDefinition(CommandType.CREATE_NOTE,CREATE,NOTE));
+        commands.add(new CommandDefinition(CommandType.VIEW_NOTE,VIEW,NOTE));
+        commands.add(new CommandDefinition(CommandType.VIEW_NOTES,VIEW,NOTES));
         commands.add(new CommandDefinition(CommandType.EDIT_NOTE_TITLE,EDIT,NOTE,TITLE));
         commands.add(new CommandDefinition(CommandType.EDIT_NOTE_BODY,EDIT,NOTE,BODY));
         commands.add(new CommandDefinition(CommandType.LIST_NOTE,LIST,NOTE));
