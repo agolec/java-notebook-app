@@ -7,6 +7,9 @@ import com.example.notebookapp.ui.input.ConsoleInput;
 import com.example.notebookapp.ui.input.InputValidation;
 import com.example.notebookapp.ui.menu.MenuPrinter;
 
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -109,10 +112,17 @@ public class NoteOperations {
         for(Note note: notes){
             System.out.println();
             System.out.println("Title: " + note.getTitle());
-            System.out.println("Created on " + note.getCreatedDate());
-            System.out.println("Last Modified: " + note.getModifiedDate());
+            System.out.println("Created on " + trimDate(note.getCreatedDate()));
+            System.out.println("Last Modified: " + trimDate(note.getModifiedDate()));
             System.out.println("Word Count: " + note.getWordCount());
             System.out.println();
         }
     }
-}
+        private static String trimDate(LocalDateTime date){
+            LocalDateTime modded = date.withYear(1966);
+
+            DateTimeFormatter friendly = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm:SS a");
+
+            return modded.format(friendly);
+        }
+    }

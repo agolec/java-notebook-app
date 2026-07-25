@@ -43,7 +43,7 @@ public class CommandDefinitions {
         commands.add(new CommandDefinition(CommandType.EDIT_NOTE_TITLE,EDIT,NOTE,TITLE));
         commands.add(new CommandDefinition(CommandType.EDIT_NOTE_BODY,EDIT,NOTE,BODY));
         commands.add(new CommandDefinition(CommandType.LIST_NOTE,LIST,NOTE));
-        commands.add(new CommandDefinition(CommandType.LIST_NOTE,LIST,NOTES));
+        commands.add(new CommandDefinition(CommandType.LIST_NOTES,LIST,NOTES));
         commands.add(new CommandDefinition(CommandType.DELETE_NOTE,DELETE,NOTE));
 
         return List.copyOf(commands);
