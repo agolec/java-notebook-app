@@ -1,8 +1,10 @@
-package com.example.notebookapp.operations;
+package com.example.notebookapp.operations.folder;
 
 import com.example.notebookapp.command.Command;
+import com.example.notebookapp.command.CommandUtils;
 import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
+import com.example.notebookapp.operations.NoteOperations;
 import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.repository.NoteRepository;
 import com.example.notebookapp.ui.display.NoteDisplay;
@@ -27,7 +29,7 @@ public class FolderOperations {
     }
     public static void createFolder(Command command, ApplicationContext context) {
         String folderName;
-        folderName = assignFolderName(command);
+        folderName = CommandUtils.getFirstArgument(command,"Please enter a title as an argument");
 
         if(folderName.isEmpty()){
             return;
@@ -44,17 +46,6 @@ public class FolderOperations {
         } else {
             System.out.println("Folder already exists");
         }
-    }
-
-    private static String assignFolderName(Command command) {
-        String folderName;
-        try{
-            folderName = command.getArguments()[0];
-        } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("Please enter a title as an argument");
-            return "";
-        }
-        return folderName;
     }
 
     public static void openFolder(NoteRepository repository, Scanner kb) {
@@ -75,7 +66,7 @@ public class FolderOperations {
         folderMenu(repository,currentFolder,kb);
     }
     public static void openFolder(ApplicationContext context, Command command){
-        String folderName = assignFolderName(command);
+        String folderName = CommandUtils.getFirstArgument(command,"Please enter a title as an argument");
         Folder folder = context.getRepository().getFolder(folderName);
 
         if(folder == null){
@@ -176,7 +167,7 @@ public class FolderOperations {
         if(repository.getFolders().isEmpty()){
             System.out.println("No folders to delete");
         }
-        String folder = assignFolderName(command);
+        String folder = CommandUtils.getFirstArgument(command,"Please enter a title as an argument");
         //I assume a null check is needed to see if the folder exists at all to output the appropriate message?????
         if(repository.getFolder(folder) == null){
             return;

@@ -1,5 +1,7 @@
 package com.example.notebookapp.operations;
 
+import com.example.notebookapp.command.Command;
+import com.example.notebookapp.command.CommandUtils;
 import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
 import com.example.notebookapp.persistence.ApplicationContext;
@@ -7,6 +9,10 @@ import com.example.notebookapp.ui.input.ConsoleInput;
 import com.example.notebookapp.ui.input.InputValidation;
 import com.example.notebookapp.ui.menu.MenuPrinter;
 
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class NoteOperations {
@@ -90,4 +96,57 @@ public class NoteOperations {
             System.out.println(note.getTitle());
         }
     }
-}
+
+    public static void viewNotes(Folder currentFolder) {
+        if(currentFolder.getNotes() == null){
+            System.out.println("no notes");
+        }
+        else if(currentFolder.getNotes().isEmpty()){
+            System.out.println("no notes");
+        } else{
+            printNotesInCurrentFolder(currentFolder);
+        }
+
+    }
+    public static void viewNote(Folder currentFolder, Command command){
+        if(currentFolder == null){
+            System.out.println("please select a folder to view a note");
+        }
+        String noteName = CommandUtils.getFirstArgument(command,"Please enter a note title with this command.");
+        if(noteName == null){
+            return;
+        }
+        else{
+            printNote(currentFolder.getNote(noteName));
+        }
+    }
+
+    private static void printNotesInCurrentFolder(Folder currentFolder) {
+        List<Note> notes = currentFolder.getNotes();
+        for(Note note: notes){
+            displayNoteMetadata(note);
+        }
+    }
+    private static void printNote(Note note){
+        displayNoteMetadata(note);
+    }
+    private static void displayNoteMetadata(Note note){
+        System.out.println();
+        System.out.println("Title: " + note.getTitle());
+        System.out.println("Created on " + trimDate(note.getCreatedDate()));
+        System.out.println("Last Modified: " + trimDate(note.getModifiedDate()));
+        System.out.println("Word Count: " + note.getWordCount());
+        System.out.println();
+    }
+        private static String trimDate(LocalDateTime date){
+        if(date == null){
+            return "null";
+        }
+
+            LocalDateTime trimmed = date;
+
+            DateTimeFormatter friendly = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm:SS a");
+
+            return trimmed.format(friendly);
+        }
+    }
