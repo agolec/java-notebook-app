@@ -27,7 +27,6 @@ public class Note implements Serializable {
         this();
         this.setTitle(title);
         this.setBody(body);
-        this.modifiedDate = null;
     }
     public Note(Note note){
         this(note.title, note.body);

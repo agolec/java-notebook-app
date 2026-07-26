@@ -1,17 +1,11 @@
 package com.example.notebookapp.ui;
 
-import com.example.notebookapp.model.Folder;
-import com.example.notebookapp.model.Note;
-import com.example.notebookapp.operations.FolderOperations;
+import com.example.notebookapp.operations.folder.FolderOperations;
 import com.example.notebookapp.persistence.RepositoryStorage;
 import com.example.notebookapp.repository.NoteRepository;
 import com.example.notebookapp.ui.display.FolderDisplay;
-import com.example.notebookapp.ui.input.ConsoleInput;
-import com.example.notebookapp.ui.input.InputValidation;
 import com.example.notebookapp.ui.menu.MenuPrinter;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class NotebookConsole {

@@ -1,7 +1,7 @@
 package com.example.notebookapp.command;
 
 import com.example.notebookapp.HelpText;
-import com.example.notebookapp.operations.FolderOperations;
+import com.example.notebookapp.operations.folder.FolderOperations;
 import com.example.notebookapp.operations.NoteOperations;
 import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.ui.display.FolderDisplay;
@@ -41,6 +41,10 @@ public class CommandExecution {
             }
             case LIST_NOTE -> {
                 NoteOperations.displayNotes(context.getCurrentFolder());
+                return ExecutionResult.CONTINUE;
+            }
+            case VIEW_NOTE -> {
+                NoteOperations.viewNote(context.getCurrentFolder(),command);
                 return ExecutionResult.CONTINUE;
             }
             case VIEW_NOTES -> {
