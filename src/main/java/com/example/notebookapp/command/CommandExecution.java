@@ -53,6 +53,7 @@ public class CommandExecution {
             }
             case CREATE_NOTE -> {
                 NoteOperations.createNote(context.getCurrentFolder(),command);
+                NoteOperations.createNoteBody(context.getCurrentFolder());
                 return ExecutionResult.CONTINUE;
             }
             default -> {

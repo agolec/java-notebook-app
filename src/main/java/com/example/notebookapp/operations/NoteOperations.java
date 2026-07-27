@@ -4,12 +4,10 @@ import com.example.notebookapp.command.Command;
 import com.example.notebookapp.command.CommandUtils;
 import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
-import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.ui.input.ConsoleInput;
 import com.example.notebookapp.ui.input.InputValidation;
 import com.example.notebookapp.ui.menu.MenuPrinter;
 
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -167,6 +165,12 @@ public class NoteOperations {
         Note noteToAdd = new Note(noteName,"");
         boolean added = currentFolder.addNote(noteToAdd);
         System.out.println(added ? "Note successfully added." : "Note not added.");
+
+    }
+    public static void createNoteBody(Folder currentFolder, com.example.notebookapp.commandparse.console.input.ConsoleInput input){
+
+        final String TERMINATOR = ":end";
+        String body = input.getMultiLineUntil("Enter a note body. Enter a new line and type " + TERMINATOR + " to end.",TERMINATOR);
 
     }
 }
