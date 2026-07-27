@@ -149,4 +149,24 @@ public class NoteOperations {
 
             return trimmed.format(friendly);
         }
+
+    public static void createNote(Folder currentFolder,Command command) {
+        if(currentFolder == null){
+            System.out.println("Please enter a folder name to add a note.");
+            return;
+        }
+
+        String noteName = CommandUtils.getFirstArgument(command,"Error: Must enter a note name.");
+        Note existing = currentFolder.getNote(noteName);
+
+        if(existing != null){
+            System.out.println("Note already exists. Please use a different title.");
+            return;
+        }
+
+        Note noteToAdd = new Note(noteName,"");
+        boolean added = currentFolder.addNote(noteToAdd);
+        System.out.println(added ? "Note successfully added." : "Note not added.");
+
     }
+}

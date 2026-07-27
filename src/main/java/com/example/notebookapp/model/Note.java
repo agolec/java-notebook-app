@@ -69,7 +69,11 @@ public class Note implements Serializable {
     }
 
     public void setBody(String body) {
-        this.body = body;
+        if(body == null){
+            this.body = "";
+        } else {
+            this.body = body;
+        }
         touch();
     }
     public void touch(){
