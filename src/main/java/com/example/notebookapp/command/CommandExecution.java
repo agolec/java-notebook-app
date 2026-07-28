@@ -1,6 +1,7 @@
 package com.example.notebookapp.command;
 
 import com.example.notebookapp.HelpText;
+import com.example.notebookapp.commandparse.console.input.ConsoleInput;
 import com.example.notebookapp.operations.folder.FolderOperations;
 import com.example.notebookapp.operations.NoteOperations;
 import com.example.notebookapp.persistence.ApplicationContext;
@@ -8,7 +9,7 @@ import com.example.notebookapp.ui.display.FolderDisplay;
 
 public class CommandExecution {
 
-    public static ExecutionResult execute(Command command, ApplicationContext context){
+    public static ExecutionResult execute(Command command, ApplicationContext context, ConsoleInput consoleInput){
         switch(command.getCommandType()){
             case EXIT -> {
                 return ExecutionResult.EXIT;
@@ -53,7 +54,10 @@ public class CommandExecution {
             }
             case CREATE_NOTE -> {
                 NoteOperations.createNote(context.getCurrentFolder(),command);
-                NoteOperations.createNoteBody(context.getCurrentFolder());
+                return ExecutionResult.CONTINUE;
+            }
+            case EDIT_NOTE_BODY -> {
+                NoteOperations.createNoteBody(context.getCurrentFolder(),command,consoleInput);
                 return ExecutionResult.CONTINUE;
             }
             default -> {

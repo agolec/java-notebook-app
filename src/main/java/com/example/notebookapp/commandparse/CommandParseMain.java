@@ -33,7 +33,7 @@ public class CommandParseMain {
             Command command = InputParser.parseCommand(input);
 
 
-            executionResult = CommandExecution.execute(command,context);
+            executionResult = CommandExecution.execute(command,context,conIn);
 
             if (exitOptionSelected(executionResult, storage, repository)) break;
         }

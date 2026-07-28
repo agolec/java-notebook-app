@@ -167,10 +167,23 @@ public class NoteOperations {
         System.out.println(added ? "Note successfully added." : "Note not added.");
 
     }
-    public static void createNoteBody(Folder currentFolder, com.example.notebookapp.commandparse.console.input.ConsoleInput input){
+    public static void createNoteBody(Folder currentFolder, Command command, com.example.notebookapp.commandparse.console.input.ConsoleInput input){
+        if(currentFolder == null){
+            System.out.println("Current folder is null.");
+            return;
+        }
+
+        String noteName = CommandUtils.getFirstArgument(command,"Error: Must enter a note name.");
+        Note existing = currentFolder.getNote(noteName);
+
+        if(existing == null){
+            System.out.println("To add a body, enter the title of an existing note.");
+            return;
+        }
 
         final String TERMINATOR = ":end";
         String body = input.getMultiLineUntil("Enter a note body. Enter a new line and type " + TERMINATOR + " to end.",TERMINATOR);
-
+        System.out.println("Exited body creator.");
+        existing.setBody(body);
     }
 }
