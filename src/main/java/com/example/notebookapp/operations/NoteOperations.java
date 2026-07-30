@@ -4,12 +4,10 @@ import com.example.notebookapp.command.Command;
 import com.example.notebookapp.command.CommandUtils;
 import com.example.notebookapp.model.Folder;
 import com.example.notebookapp.model.Note;
-import com.example.notebookapp.persistence.ApplicationContext;
 import com.example.notebookapp.ui.input.ConsoleInput;
 import com.example.notebookapp.ui.input.InputValidation;
 import com.example.notebookapp.ui.menu.MenuPrinter;
 
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -169,6 +167,26 @@ public class NoteOperations {
         System.out.println(added ? "Note successfully added." : "Note not added.");
 
     }
+    public static void createNoteBody(Folder currentFolder, Command command, com.example.notebookapp.commandparse.console.input.ConsoleInput input){
+        if(currentFolder == null){
+            System.out.println("Current folder is null.");
+            return;
+        }
+
+        String noteName = CommandUtils.getFirstArgument(command,"Error: Must enter a note name.");
+        Note existing = currentFolder.getNote(noteName);
+
+        if(existing == null){
+            System.out.println("To add a body, enter the title of an existing note.");
+            return;
+        }
+
+        final String TERMINATOR = ":end";
+        String body = input.getMultiLineUntil("Enter a note body. Enter a new line and type " + TERMINATOR + " to end.",TERMINATOR);
+        System.out.println("Exited body creator.");
+        existing.setBody(body);
+    }
+}
     public static void deleteNote(Folder currentFolder,Command command){
         String titleOfNoteToDelete = CommandUtils.getFirstArgument(command,"Enter a title to delete a note");
         Note noteToDelete = currentFolder.getNote(titleOfNoteToDelete);

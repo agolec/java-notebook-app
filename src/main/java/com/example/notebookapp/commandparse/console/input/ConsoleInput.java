@@ -26,4 +26,15 @@ public class ConsoleInput {
         } while(input == null || input.isBlank());
         return input;
     }
+    public String getMultiLineUntil(String prompt, String terminator){
+        final String END = terminator;
+        StringBuilder sb = new StringBuilder();
+
+        System.out.println(prompt);
+        String line;
+        while(!(line = this.scanner.nextLine()).equals(END)){
+            sb.append(line).append("\n");
+        }
+        return sb.toString();
+    }
 }
