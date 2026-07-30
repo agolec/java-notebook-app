@@ -58,6 +58,10 @@ public class CommandExecution {
             }
             case EDIT_NOTE_BODY -> {
                 NoteOperations.createNoteBody(context.getCurrentFolder(),command,consoleInput);
+                return ExecutionResult.Continue;
+            }
+            case DELETE_NOTE -> {
+                NoteOperations.deleteNote(context.getCurrentFolder(),command);
                 return ExecutionResult.CONTINUE;
             }
             default -> {
