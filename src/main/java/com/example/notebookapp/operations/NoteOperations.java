@@ -186,7 +186,6 @@ public class NoteOperations {
         System.out.println("Exited body creator.");
         existing.setBody(body);
     }
-}
     public static void deleteNote(Folder currentFolder,Command command){
         String titleOfNoteToDelete = CommandUtils.getFirstArgument(command,"Enter a title to delete a note");
         Note noteToDelete = currentFolder.getNote(titleOfNoteToDelete);

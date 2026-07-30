@@ -58,7 +58,7 @@ public class CommandExecution {
             }
             case EDIT_NOTE_BODY -> {
                 NoteOperations.createNoteBody(context.getCurrentFolder(),command,consoleInput);
-                return ExecutionResult.Continue;
+                return ExecutionResult.CONTINUE;
             }
             case DELETE_NOTE -> {
                 NoteOperations.deleteNote(context.getCurrentFolder(),command);
