@@ -55,6 +55,10 @@ public class CommandExecution {
                 NoteOperations.createNote(context.getCurrentFolder(),command);
                 return ExecutionResult.CONTINUE;
             }
+            case DELETE_NOTE -> {
+                NoteOperations.deleteNote(context.getCurrentFolder(),command);
+                return ExecutionResult.CONTINUE;
+            }
             default -> {
                 System.out.println("Switch case not implemented for command type" +
                         " yet. Please make a case");

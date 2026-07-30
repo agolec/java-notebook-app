@@ -169,4 +169,19 @@ public class NoteOperations {
         System.out.println(added ? "Note successfully added." : "Note not added.");
 
     }
+    public static void deleteNote(Folder currentFolder,Command command){
+        String titleOfNoteToDelete = CommandUtils.getFirstArgument(command,"Enter a title to delete a note");
+        Note noteToDelete = currentFolder.getNote(titleOfNoteToDelete);
+        if(noteToDelete == null){
+            System.out.println("note does not exist");
+            return;
+        }
+        boolean deleted = currentFolder.removeNote(noteToDelete);
+        if(deleted){
+            System.out.println("note deleted successfully.");
+            return;
+        } else{
+            System.out.println("Could not delete note.");
+        }
+    }
 }
