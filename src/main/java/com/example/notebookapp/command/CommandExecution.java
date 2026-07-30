@@ -27,6 +27,10 @@ public class CommandExecution {
                 FolderOperations.createFolder(command, context);
                 return ExecutionResult.CONTINUE;
             }
+            case VIEW_FOLDER -> {
+                FolderOperations.viewFolder(command,context);
+                return ExecutionResult.CONTINUE;
+            }
             case LIST_FOLDER -> {
 
                 FolderDisplay.listFolders(context.getRepository(),false);

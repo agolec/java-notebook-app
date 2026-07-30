@@ -6,6 +6,7 @@ public enum CommandType {
     EDIT_FOLDER_TITLE,
     EDIT_FOLDER_BODY,
     LIST_FOLDER,
+    VIEW_FOLDER,
     DELETE_FOLDER,
     CREATE_NOTE,
     EDIT_NOTE_TITLE,

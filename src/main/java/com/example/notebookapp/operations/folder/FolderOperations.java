@@ -17,6 +17,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FolderOperations {
+    public static void viewFolder(Command command,ApplicationContext context){
+        if(CommandUtils.getFirstArgument(command,null).isEmpty()){
+            if(context.getCurrentFolder() == null){
+                System.out.println("No folder selected.");
+            } else {
+                Folder folder = context.getCurrentFolder();
+                System.out.println("Name: " + folder.getName());
+                System.out.println("Created date: " + folder.getCreatedDate());
+                System.out.println("Accessed date: " + folder.getAccessedDate());
+                System.out.println("Modified date: " + folder.getModifiedDate());
+                System.out.println("Read Only: " + folder.getReadOnly());
+            }
+        }
+    }
     public static void createFolder(NoteRepository repository, Scanner kb) {
 
         String name = ConsoleInput.askForFolderName(kb);
