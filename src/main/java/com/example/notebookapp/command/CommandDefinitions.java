@@ -34,6 +34,8 @@ public class CommandDefinitions {
         commands.add(new CommandDefinition(CommandType.EDIT_FOLDER_TITLE,EDIT,FOLDER,TITLE));
         commands.add(new CommandDefinition(CommandType.EDIT_FOLDER_BODY,EDIT,FOLDER,BODY));
         commands.add(new CommandDefinition(CommandType.LIST_FOLDER,LIST,FOLDER + "s"));
+        commands.add(new CommandDefinition(CommandType.VIEW_FOLDER,VIEW,FOLDER + "s"));
+        commands.add(new CommandDefinition(CommandType.VIEW_FOLDER,VIEW,FOLDER));
         commands.add(new CommandDefinition(CommandType.DELETE_FOLDER,DELETE,FOLDER));
 
 

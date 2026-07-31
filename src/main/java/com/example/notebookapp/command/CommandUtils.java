@@ -6,8 +6,10 @@ public class CommandUtils {
         try{
             argumentString = command.getArguments()[0];
         } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println(errorMessage);
-            return null;
+            if(errorMessage != null){
+                System.out.println(errorMessage);
+            }
+            return "";
         }
         return argumentString;
     }

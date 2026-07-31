@@ -11,7 +11,6 @@ public class Folder implements Serializable {
     private List<Note> notes;
     private boolean readOnly;
     final LocalDateTime createdDate;
-    LocalDateTime accessedDate;
     LocalDateTime modifiedDate;
     public Folder(String name, boolean readOnly){
         this.notes = new ArrayList<Note>();
@@ -111,13 +110,10 @@ public class Folder implements Serializable {
     public LocalDateTime getModifiedDate(){
         return this.modifiedDate;
     }
-    public void setAccessedDate(){
-        this.accessedDate = LocalDateTime.now();
+     public LocalDateTime getAccessedDate(){
+        return LocalDateTime.now();
     }
-    public LocalDateTime getAccessedDate(){
-        return this.accessedDate;
+    public LocalDateTime getCreatedDate(){
+        return this.createdDate;
     }
-
-
-
 }
