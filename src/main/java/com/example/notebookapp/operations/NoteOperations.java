@@ -115,6 +115,11 @@ public class NoteOperations {
             return;
         }
         else{
+            Note currentNote = currentFolder.getNote(noteName);
+            if(currentNote == null){
+                System.out.println("note does not exist");
+                return;
+            }
             printNote(currentFolder.getNote(noteName));
         }
     }
